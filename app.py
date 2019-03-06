@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 import pickle
-import rake
 from summa import keywords
 import utility 
 
@@ -21,9 +20,9 @@ def predict():
     ratio = float(data['ratio'])
     stoppath = "data/stoplists/{0}.txt".format(lang)
     
-    keywords = keywords.keywords(text=text, ratio=ratio,additional_stopwords=utility.load_stop_words(stoppath))
+    result = keywords.keywords(text=text, ratio=ratio,additional_stopwords=utility.load_stop_words(stoppath))
 
-    return jsonify(keywords)
+    return jsonify(result)
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
 
